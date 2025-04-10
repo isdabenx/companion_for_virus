@@ -1,3 +1,4 @@
+import 'package:companion_for_virus/core/app_colors.dart';
 import 'package:companion_for_virus/core/router/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -18,16 +19,25 @@ class SharedAppBarWidget extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor: AppColors.appBarBackgroundColor,
       title: Column(
         children: [
           if (isHome)
             const Text(
               "Campanion for",
-              style: TextStyle(fontSize: 14, fontStyle: FontStyle.italic),
+              style: TextStyle(
+                fontSize: 14,
+                fontStyle: FontStyle.italic,
+                color: AppColors.appBarTextColor,
+              ),
             ),
           Text(
             title,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: AppColors.appBarTextColor,
+            ),
           ),
         ],
       ),

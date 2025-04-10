@@ -1,3 +1,4 @@
+import 'package:companion_for_virus/core/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class SharedScaffoldWidget extends StatelessWidget {
@@ -7,6 +8,10 @@ class SharedScaffoldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: appBar, body: body);
+    return Scaffold(
+      appBar: appBar,
+      body: body,
+      backgroundColor: AppColors.themeBackgroundColor,
+    );
   }
 }
