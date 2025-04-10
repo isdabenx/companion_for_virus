@@ -18,3 +18,16 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: Helvetica
+      fonts:
+        - asset: assets/fonts/helvetica_lt_std_condensed.otf
+          weight: 400
+        - asset: assets/fonts/helvetica_lt_std_bold_condensed.otf
+          weight: 700
+        - asset: assets/fonts/helvetica_lt_std_black_condensed.otf
+          weight: 900
+    - family: HelveticaNeue
+      fonts:
+        - asset: assets/fonts/helvetica_neue_lt_pro_black_condensed.otf
+          weight: 900
