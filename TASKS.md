@@ -8,12 +8,12 @@ Aquest document agrupa les tasques per mòduls lògics i dependències tècnique
 
 ## 🚀 Setup & Core Infrastructure (Fonaments)
 
-* [ ] Crear projecte Flutter, configurar Git i repositori GitHub.
+* [x] Crear projecte Flutter, configurar Git i repositori GitHub.
 * [x] Definir l'estructura de carpetes del projecte.
 * [ ] Afegir dependències essencials (`pubspec.yaml`):
   * [ ] `flutter_riverpod` + `riverpod_annotation` + `riverpod_generator`
   * [ ] `freezed` + `freezed_annotation`
-  * [ ] `go_router`
+  * [x] `go_router`
   * [ ] `easy_localization`
   * [ ] `shared_preferences`
   * [ ] `url_launcher`
@@ -22,7 +22,7 @@ Aquest document agrupa les tasques per mòduls lògics i dependències tècnique
 * [ ] Configurar `build_runner` per a generació de codi (`freezed`, `riverpod`).
 * [ ] Configurar `easy_localization` (carpeta `assets/translations`, fitxers `ca.json`, `es.json`, `en.json` bàsics).
 * [ ] Definir paleta de colors i `ThemeData` base per a tema Clar i Fosc.
-* [ ] Configurar `go_router`: definir rutes principals (`/`, `/home`, `/official-cards`, `/fan-cards`, `/rules`, `/faq`, `/settings`, etc.).
+* [x] Configurar `go_router`: definir rutes principals (`/`, `/home`, `/official-cards`, `/fan-cards`, `/rules`, `/faq`, `/settings`, etc.).
 * [ ] Implementar l'arrel de l'App (`MaterialApp.router`) connectant Core Services (Router, Localization, Theme).
 
 ## 💧 Feature: Splash Screen (`/`) (Càrrega Inicial)
@@ -30,13 +30,13 @@ Aquest document agrupa les tasques per mòduls lògics i dependències tècnique
 * [ ] Crear la pantalla/widget per al Splash Screen (UI simple: logo/nom, indicador).
 * [ ] Implementar la lògica de càrrega inicial (preferències d'usuari des de `shared_preferences`).
 * [ ] Aplicar l'idioma i tema carregats.
-* [ ] Implementar la navegació a `/home` quan la càrrega finalitzi.
+* [x] Implementar la navegació a `/home` quan la càrrega finalitzi.
 
 ## 뼈 UI Shell & Navegació Bàsica (Estructura Visual Post-Splash)
 
-* [ ] Crear Scaffolds bàsics (placeholders) per a les pantalles principals (Home, Oficials, Fans, Regles, FAQ, Settings) per verificar la configuració de `go_router`.
-* [ ] Implementar un Scaffold principal reutilitzable o una estructura base comuna.
-* [ ] Implementar AppBar global/reutilitzable amb títol dinàmic i icona ⚙️ per a Configuració (la navegació a `/settings` ha de funcionar).
+* [x] Crear Scaffolds bàsics (placeholders) per a les pantalles principals (Home, Oficials, Fans, Regles, FAQ, Settings) per verificar la configuració de `go_router`.
+* [x] Implementar un Scaffold principal reutilitzable o una estructura base comuna.
+* [x] Implementar AppBar global/reutilitzable amb títol dinàmic i icona ⚙️ per a Configuració (la navegació a `/settings` ha de funcionar).
 
 ## 🏠 Feature: Pantalla Home (`/home`) (Punt d'Entrada Principal)
 
