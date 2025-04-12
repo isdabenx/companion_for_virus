@@ -19,7 +19,7 @@ class MenuCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double borderRadius = 16.0;
+    const double borderRadius = 16.0;
 
     return InkWell(
       borderRadius: BorderRadius.circular(borderRadius),
