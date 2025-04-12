@@ -11,14 +11,14 @@ Aquest document agrupa les tasques per mòduls lògics i dependències tècnique
 * [x] Crear projecte Flutter, configurar Git i repositori GitHub.
 * [x] Definir l'estructura de carpetes del projecte.
 * [ ] Afegir dependències essencials (`pubspec.yaml`):
-  * [ ] `flutter_riverpod` + `riverpod_annotation` + `riverpod_generator`
+  * [x] `flutter_riverpod` + `riverpod_annotation` + `riverpod_generator`
   * [ ] `freezed` + `freezed_annotation`
   * [x] `go_router`
   * [ ] `easy_localization`
-  * [ ] `shared_preferences`
+  * [x] `shared_preferences`
   * [ ] `url_launcher`
   * [ ] `markdown_widget`
-  * [ ] `build_runner`
+  * [x] `build_runner`
 * [ ] Configurar `build_runner` per a generació de codi (`freezed`, `riverpod`).
 * [ ] Configurar `easy_localization` (carpeta `assets/translations`, fitxers `ca.json`, `es.json`, `en.json` bàsics).
 * [ ] Definir paleta de colors i `ThemeData` base per a tema Clar i Fosc.
@@ -40,14 +40,14 @@ Aquest document agrupa les tasques per mòduls lògics i dependències tècnique
 
 ## 🏠 Feature: Pantalla Home (`/home`) (Punt d'Entrada Principal)
 
-* [ ] Implementar layout per defecte en graella 2x2.
-* [ ] Crear widget reutilitzable `SectionButton` (icona, text, color).
-* [ ] Assignar colors correctes als botons de secció.
-* [ ] Integrar els `SectionButton` al layout de Home.
-* [ ] Implementar la navegació des dels botons a les rutes corresponents.
-* [ ] Afegir botó a l'AppBar per canviar vista Graella/Llista.
-* [ ] Implementar la vista alternativa en Llista vertical.
-* [ ] Implementar Provider (`Riverpod`) per gestionar l'estat de la vista (graella/llista).
+* [x] Implementar layout per defecte en graella 2x2.
+* [x] Crear widget reutilitzable `SectionButton` (icona, text, color).
+* [x] Assignar colors correctes als botons de secció.
+* [x] Integrar els `SectionButton` al layout de Home.
+* [x] Implementar la navegació des dels botons a les rutes corresponents.
+* [x] Afegir botó a l'AppBar per canviar vista Graella/Llista.
+* [x] Implementar la vista alternativa en Llista vertical.
+* [x] Implementar Provider (`Riverpod`) per gestionar l'estat de la vista (graella/llista).
 
 ## 🃏 Feature: Visualització de Cartes (Oficials) (Funcionalitat Core)
 
