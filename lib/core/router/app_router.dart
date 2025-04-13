@@ -1,5 +1,6 @@
 import 'package:companion_for_virus/core/router/app_routes.dart';
 import 'package:companion_for_virus/features/home/screens/home_screen.dart';
+import 'package:companion_for_virus/features/settings/screens/settings_screen.dart';
 import 'package:companion_for_virus/features/splash/screens/splash_screen.dart';
 import 'package:companion_for_virus/shared/widgets/shared_app_bar_widget.dart';
 import 'package:companion_for_virus/shared/widgets/shared_scaffold_widget.dart';
@@ -50,7 +51,11 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: AppRoutes.settings,
       name: AppRoutes.settings,
-      builder: (context, state) => const Placeholder(color: Colors.grey),
+      builder:
+          (context, state) => SharedScaffoldWidget(
+            appBar: SharedAppBarWidget(title: "Settings", settings: false),
+            body: const SettingsScreen(),
+          ),
     ),
   ],
 );
