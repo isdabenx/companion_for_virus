@@ -14,41 +14,52 @@ class HomeScreen extends ConsumerWidget {
     final AsyncValue<bool> isGridAsync = ref.watch(homeViewIsGridProvider);
     final bool isGrid = isGridAsync.value ?? true;
     return Center(
-      child: GridView.count(
-        shrinkWrap: true,
-        padding: const EdgeInsets.all(8),
-        mainAxisSpacing: 8,
-        crossAxisSpacing: 8,
-        crossAxisCount: isGrid ? 2 : 1,
-        childAspectRatio: isGrid ? 1 : 4,
+      child: Column(
         children: [
-          MenuCardWidget(
-            isGrid: isGrid,
-            title: "Official Cards",
-            icon: Icons.view_carousel_rounded,
-            color: AppColors.menuOfficialCardsBackgroundColor,
-            onTap: () => context.push(AppRoutes.officialCards),
+          Expanded(
+            flex: 2,
+            child: Image.asset("assets/images/logo.webp", fit: BoxFit.fitWidth),
           ),
-          MenuCardWidget(
-            isGrid: isGrid,
-            title: "Fan Cards",
-            icon: Icons.people_rounded,
-            color: AppColors.menuFanCardsBackgroundColor,
-            onTap: () => context.push(AppRoutes.fanCards),
-          ),
-          MenuCardWidget(
-            isGrid: isGrid,
-            title: "Rules",
-            icon: Icons.menu_book_rounded,
-            color: AppColors.menuRulesBackgroundColor,
-            onTap: () => context.push(AppRoutes.rules),
-          ),
-          MenuCardWidget(
-            isGrid: isGrid,
-            title: "FAQ",
-            icon: Icons.help_outline_rounded,
-            color: AppColors.menuFaqBackgroundColor,
-            onTap: () => context.push(AppRoutes.faq),
+          Expanded(
+            flex: 5,
+            child: GridView.count(
+              shrinkWrap: true,
+              padding: const EdgeInsets.all(8),
+              mainAxisSpacing: 8,
+              crossAxisSpacing: 8,
+              crossAxisCount: isGrid ? 2 : 1,
+              childAspectRatio: isGrid ? 1 : 3,
+              children: [
+                MenuCardWidget(
+                  isGrid: isGrid,
+                  title: "Official Cards",
+                  icon: Icons.view_carousel_rounded,
+                  color: AppColors.menuOfficialCardsBackgroundColor,
+                  onTap: () => context.push(AppRoutes.officialCards),
+                ),
+                MenuCardWidget(
+                  isGrid: isGrid,
+                  title: "Fan Cards",
+                  icon: Icons.people_rounded,
+                  color: AppColors.menuFanCardsBackgroundColor,
+                  onTap: () => context.push(AppRoutes.fanCards),
+                ),
+                MenuCardWidget(
+                  isGrid: isGrid,
+                  title: "Rules",
+                  icon: Icons.menu_book_rounded,
+                  color: AppColors.menuRulesBackgroundColor,
+                  onTap: () => context.push(AppRoutes.rules),
+                ),
+                MenuCardWidget(
+                  isGrid: isGrid,
+                  title: "FAQ",
+                  icon: Icons.help_outline_rounded,
+                  color: AppColors.menuFaqBackgroundColor,
+                  onTap: () => context.push(AppRoutes.faq),
+                ),
+              ],
+            ),
           ),
         ],
       ),

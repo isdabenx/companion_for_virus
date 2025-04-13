@@ -1,6 +1,5 @@
 import 'package:companion_for_virus/core/providers/shared_preferences.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 part 'home_view_is_grid.g.dart';
 
@@ -15,9 +14,7 @@ class HomeViewIsGrid extends _$HomeViewIsGrid {
   }
 
   Future<void> toogle() async {
-    final SharedPreferences sharedPreferences = await ref.read(
-      sharedPreferencesProvider.future,
-    );
+    final sharedPreferences = await ref.read(sharedPreferencesProvider.future);
     final newValue = !(state.value ?? true);
     await sharedPreferences.setBool(_key, newValue);
     state = AsyncValue.data(newValue);
