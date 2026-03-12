@@ -27,7 +27,7 @@ class SharedAppBarWidget extends StatelessWidget
         children: [
           if (isHome)
             const Text(
-              "Campanion for",
+              "Companion for",
               style: TextStyle(
                 fontSize: 14,
                 fontStyle: FontStyle.italic,

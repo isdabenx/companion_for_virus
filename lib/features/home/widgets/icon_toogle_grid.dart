@@ -1,4 +1,4 @@
-import 'package:companion_for_virus/features/home/poviders/home_view_is_grid.dart';
+import 'package:companion_for_virus/features/home/providers/home_view_is_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
