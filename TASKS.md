@@ -1,133 +1,123 @@
-# [Project Checklist] Companion for Virus
+# [Project Checklist] Companion for Virus!
 
-Aquest document agrupa les tasques per mòduls lògics i dependències tècniques per al desenvolupament de "Companion for Virus!".
+Checklist de desarrollo alineado con `DESIGN.md`. Las tareas siguen el orden de las fases de desarrollo.
 
-**Referència:** Consulta el `Document del Projecte` per a més detalls sobre cada funcionalitat.
+**Referencia:** Consulta [DESIGN.md](DESIGN.md) para detalles de cada funcionalidad.
 
 ---
 
-## 🚀 Setup & Core Infrastructure (Fonaments)
+## Fase 1: Infraestructura y limpieza
 
-* [x] Crear projecte Flutter, configurar Git i repositori GitHub.
-* [x] Definir l'estructura de carpetes del projecte.
-* [ ] Afegir dependències essencials (`pubspec.yaml`):
-  * [x] `flutter_riverpod` + `riverpod_annotation` + `riverpod_generator`
-  * [ ] `freezed` + `freezed_annotation`
-  * [x] `go_router`
-  * [ ] `easy_localization`
-  * [x] `shared_preferences`
-  * [ ] `url_launcher`
-  * [ ] `markdown_widget`
-  * [x] `build_runner`
-* [ ] Configurar `build_runner` per a generació de codi (`freezed`, `riverpod`).
-* [ ] Configurar `easy_localization` (carpeta `assets/translations`, fitxers `ca.json`, `es.json`, `en.json` bàsics).
-* [ ] Definir paleta de colors i `ThemeData` base per a tema Clar i Fosc.
-* [x] Configurar `go_router`: definir rutes principals (`/`, `/home`, `/official-cards`, `/fan-cards`, `/rules`, `/faq`, `/settings`, etc.).
-* [ ] Implementar l'arrel de l'App (`MaterialApp.router`) connectant Core Services (Router, Localization, Theme).
+### Limpieza de dependencias
+* [ ] Eliminar `slang`, `slang_flutter`, `slang_build_runner` de `pubspec.yaml`.
+* [ ] Eliminar archivos generados de i18n (`lib/i18n/`).
+* [ ] Eliminar archivos JSON de traducciones (`assets/i18n/`).
+* [ ] Eliminar referencia a `assets/i18n/` en `pubspec.yaml` (sección flutter > assets).
+* [ ] Verificar que `flutter pub get` y `build_runner build` funcionan correctamente.
 
-## 💧 Feature: Splash Screen (`/`) (Càrrega Inicial)
+### Tema (claro/oscuro)
+* [ ] Definir `ThemeData` light y dark con la paleta de colores del DESIGN.md.
+* [ ] Crear provider Riverpod para `ThemeMode` (claro/oscuro/sistema) con persistencia en `SharedPreferences`.
+* [ ] Conectar `ThemeData` y `ThemeMode` al `MaterialApp.router` en `main.dart`.
+* [ ] Eliminar colores hardcoded de widgets existentes — usar `Theme.of(context)` en su lugar.
 
-* [ ] Crear la pantalla/widget per al Splash Screen (UI simple: logo/nom, indicador).
-* [ ] Implementar la lògica de càrrega inicial (preferències d'usuari des de `shared_preferences`).
-* [ ] Aplicar l'idioma i tema carregats.
-* [x] Implementar la navegació a `/home` quan la càrrega finalitzi.
+### Strings y constantes
+* [ ] Crear archivo de constantes de strings (`lib/core/strings.dart` o similar).
+* [ ] Reemplazar todas las strings hardcoded en widgets por constantes.
 
-## 뼈 UI Shell & Navegació Bàsica (Estructura Visual Post-Splash)
+### Actualizar Home (6 secciones)
+* [ ] Actualizar `HomeScreen` de 4 a 6 botones (añadir Temporizador, Partida, Aleatorizador).
+* [ ] Ajustar `GridView` para cuadrícula 2×3 o layout adaptable.
+* [ ] Actualizar colores y iconos según nueva paleta.
+* [ ] Añadir rutas nuevas a `app_routes.dart` y `app_router.dart`.
+* [ ] Eliminar ruta de fan cards.
 
-* [x] Crear Scaffolds bàsics (placeholders) per a les pantalles principals (Home, Oficials, Fans, Regles, FAQ, Settings) per verificar la configuració de `go_router`.
-* [x] Implementar un Scaffold principal reutilitzable o una estructura base comuna.
-* [x] Implementar AppBar global/reutilitzable amb títol dinàmic i icona ⚙️ per a Configuració (la navegació a `/settings` ha de funcionar).
+### Navegación
+* [ ] Limpiar rutas de fan cards del router.
+* [ ] Añadir rutas: `/timer`, `/game-tracker`, `/randomizer`.
+* [ ] Crear scaffolds placeholder para las nuevas pantallas.
+* [ ] Verificar que toda la navegación funciona (ida y vuelta).
 
-## 🏠 Feature: Pantalla Home (`/home`) (Punt d'Entrada Principal)
+---
 
-* [x] Implementar layout per defecte en graella 2x2.
-* [x] Crear widget reutilitzable `SectionButton` (icona, text, color).
-* [x] Assignar colors correctes als botons de secció.
-* [x] Integrar els `SectionButton` al layout de Home.
-* [x] Implementar la navegació des dels botons a les rutes corresponents.
-* [x] Afegir botó a l'AppBar per canviar vista Graella/Llista.
-* [x] Implementar la vista alternativa en Llista vertical.
-* [x] Implementar Provider (`Riverpod`) per gestionar l'estat de la vista (graella/llista).
+## Fase 2: Herramientas interactivas
 
-## 🃏 Feature: Visualització de Cartes (Oficials) (Funcionalitat Core)
+### Temporizador de turno (`/timer`)
+* [ ] Diseñar UI: display grande del tiempo, botones inicio/pausa/reinicio.
+* [ ] Implementar lógica del temporizador (cuenta atrás).
+* [ ] Implementar selector de duración (30s, 60s, 90s, 2min, personalizado).
+* [ ] Implementar modo cuenta progresiva (opcional).
+* [ ] Implementar alerta visual al agotar tiempo (cambio de color, animación).
+* [ ] Evaluar e integrar `audioplayers` para alerta sonora.
+* [ ] Persistir duración por defecto en `SharedPreferences`.
+* [ ] Asegurar que la pantalla se mantiene encendida durante el temporizador.
 
-* **Models i Dades:**
-  * [ ] Definir model `OfficialCard` amb `freezed`.
-  * [ ] Preparar font de dades (p.ex., JSON a `assets`).
-  * [ ] Implementar Provider (`Riverpod`) per carregar/gestionar dades (amb estats càrrega/error).
-* **UI Llista/Graella (`/official-cards`):**
-  * [ ] Crear widget `CardPreview` (imatge petita, nom curt).
-  * [ ] Implementar pantalla de llista/graella utilitzant `CardPreview`.
-  * [ ] Implementar UI dels filtres tipus "Chip" (Tipus, Color, Expansió).
-  * [ ] Implementar lògica de filtratge connectada als Chips i al Provider.
-  * [ ] Implementar indicadors de càrrega/missatges d'error bàsics.
-* **UI Detall (`/official-cards/:id`):**
-  * [ ] Implementar pantalla de Detall de Carta Oficial.
-  * [ ] Implementar la navegació des de `CardPreview` a Detall passant l'ID.
-  * [ ] Mostrar tots els detalls requerits de la carta (imatge gran, nom, descripció, interaccions).
+### Seguimiento de partida (`/game-tracker`)
+* [ ] Diseñar UI: configuración inicial (nº jugadores, nombres, expansiones).
+* [ ] Diseñar UI: estado de cada jugador (órganos con estado visual).
+* [ ] Definir modelo de datos para estado de partida (jugador, órgano, estado).
+* [ ] Implementar provider Riverpod para gestión del estado de partida.
+* [ ] Implementar pantalla de configuración de partida.
+* [ ] Implementar pantalla de seguimiento con estado de cada jugador.
+* [ ] Implementar cambio de estado de órganos (tap para ciclar: vacío → sano → infectado → vacunado → inmunizado).
+* [ ] Implementar indicador visual de quién va ganando.
+* [ ] Implementar botón de reiniciar partida (con confirmación).
 
-## 🎨 Feature: Visualització de Cartes (Fans) (Extensió)
+### Aleatorizador (`/randomizer`)
+* [ ] Diseñar UI: selectores de parámetros fijos + botón generar.
+* [ ] Definir datos de expansiones y variantes disponibles.
+* [ ] Implementar lógica de aleatorización.
+* [ ] Implementar UI de resultado (configuración generada).
+* [ ] Implementar opción de fijar parámetros y aleatorizar el resto.
 
-* **Models i Dades:**
-  * [ ] Definir model `FanCard` amb `freezed` (inclou `author`).
-  * [ ] Definir estratègia d'obtenció de dades (p.ex., JSON des d'URL GitHub).
-  * [ ] Implementar Provider (`Riverpod`) per carregar/gestionar dades (amb estats càrrega/error).
-* **UI Llista/Graella (`/fan-cards`):**
-  * [ ] Implementar pantalla de llista/graella (reutilitzant/adaptant `CardPreview` per mostrar autor).
-  * [ ] Implementar UI dels filtres tipus "Chip".
-  * [ ] Implementar lògica de filtratge.
-  * [ ] Implementar indicadors de càrrega/error.
-* **UI Detall (`/fan-cards/:id`):**
-  * [ ] Implementar pantalla de Detall de Carta Fan.
-  * [ ] Implementar la navegació des de la llista a Detall.
-  * [ ] Mostrar tots els detalls requerits (incloent autor).
-* **Integració GitHub:**
-  * [ ] Afegir botó/enllaç a la pantalla de llista.
-  * [ ] Implementar funcionalitat per obrir Issues amb `url_launcher`.
+---
 
-## 📖 Feature: Regles (`/rules`) (Contingut Estàtic/Markdown)
+## Fase 3: Contenido (catálogo)
 
-* [ ] Implementar UI de la pantalla amb `TabBar` / `TabBarView`.
-* [ ] Crear pestanyes per Joc Base i Expansions Oficials.
-* [ ] Crear pestanya "Regles Comunitat".
-* [ ] Preparar contingut de regles en arxius Markdown (`.md`).
-* [ ] Integrar `markdown_widget` per mostrar el contingut `.md` a les pestanyes.
-* [ ] Implementar layout d'acordió (`ExpansionPanelList`) per a regles de la comunitat.
-* [ ] Estructurar/obtenir i mostrar dades de regles de la comunitat dins l'acordió.
+### Cartas oficiales (`/official-cards`)
+* [ ] Definir modelo de datos `OfficialCard` (clase Dart pura).
+* [ ] Preparar datos JSON en `assets/data/` con todas las cartas del juego base.
+* [ ] Implementar provider Riverpod para cargar y filtrar cartas.
+* [ ] Crear widget `CardPreview` (imagen pequeña + nombre).
+* [ ] Implementar pantalla de lista/cuadrícula con `CardPreview`.
+* [ ] Implementar filtros tipo chip (tipo, color, expansión).
+* [ ] Implementar lógica de filtrado conectada a los chips.
+* [ ] Implementar pantalla de detalle de carta (`/official-cards/:id`).
+* [ ] Implementar navegación de lista a detalle.
+* [ ] Obtener/preparar imágenes de las cartas.
 
-## ❓ Feature: FAQ (`/faq`) (Contingut Dinàmic Simple)
+### Reglas (`/rules`)
+* [ ] Preparar archivos Markdown de reglas en `assets/rules/` (uno por expansión).
+* [ ] Implementar UI con `TabBar`/`TabBarView` (una pestaña por expansión).
+* [ ] Integrar `flutter_markdown_plus` para renderizar contenido.
+* [ ] Implementar pestaña de variantes de la comunidad con `ExpansionTile`.
 
-* [ ] Implementar UI de la pantalla amb layout d'acordió.
-* [ ] Definir/obtenir estructura de dades Pregunta/Resposta (p.ex., List\<Map> o JSON).
-* [ ] Implementar la visualització desplegable P&R connectada a les dades.
-* [ ] Afegir botó/enllaç per suggerir preguntes.
-* [ ] Implementar funcionalitat per obrir Issues amb `url_launcher`.
+### FAQ (`/faq`)
+* [ ] Definir estructura de datos pregunta/respuesta (JSON o lista en código).
+* [ ] Implementar UI con `ExpansionTile` para preguntas desplegables.
+* [ ] Preparar contenido de preguntas frecuentes.
 
-## ⚙️ Feature: Configuració (`/settings`) (Funcionalitat Completa)
+---
 
-* [ ] Implementar UI de la pantalla de Configuració.
-* **Idioma:**
-  * [ ] Implementar UI per seleccionar idioma (Català, Castellà, Anglès).
-  * [ ] Connectar UI amb `easy_localization` i `shared_preferences` (per guardar/carregar).
-* **Tema:**
-  * [ ] Implementar UI per seleccionar tema (Clar, Fosc, Automàtic).
-  * [ ] Connectar UI amb Provider de `ThemeMode` i `shared_preferences` (per guardar/carregar).
-* **Seccions Informatives:**
-  * [ ] Implementar pantalla/diàleg "About" (mostrar nom, versió, dev, enllaç GitHub amb `url_launcher`).
-  * [ ] Implementar pantalla/diàleg "Disclaimer" (mostrar avís legal).
+## Fase 4: Pulido y configuración
 
-## ✨ Tasques Transversals & Finalització (Polit i Qualitat)
+### Configuración (`/settings`)
+* [ ] Implementar UI de la pantalla de configuración.
+* [ ] Implementar selector de tema (claro/oscuro/sistema) conectado al provider.
+* [ ] Implementar config de temporizador por defecto.
+* [ ] Implementar pantalla/diálogo "Acerca de" (nombre, versión, dev, enlace GitHub).
+* [ ] Implementar pantalla/diálogo "Aviso legal" (disclaimer).
 
-* **Traduccions (`easy_localization`):**
-  * [ ] Extreure TOTES les cadenes visibles per l'usuari als fitxers `.json` (progressivament).
-  * [ ] Completar traduccions per a `ca`, `es`, `en`.
-* **Integració GitHub (Templates):**
-  * [ ] Crear plantilles (`ISSUE_TEMPLATE`) a `.github/` per a Propostes de Cartes Fan i FAQ.
-* **Qualitat i Polit:**
-  * [ ] Refinar gestió d'errors i indicadors de càrrega a tota l'app.
-  * [ ] Realitzar proves funcionals completes en diferents dispositius/mides.
-  * [ ] Revisar UI/UX (consistència, responsivitat bàsica, accessibilitat).
-  * [ ] Verificar funcionament final de temes i idiomes.
-  * [ ] Analitzar i optimitzar el rendiment si cal (ús de DevTools).
-  * [ ] Netejar codi: eliminar codi mort/comentat, afegir comentaris clau, seguir guia d'estil Dart/Flutter.
-  * [ ] Actualitzar el `README.md` principal del repositori.
+### Splash Screen
+* [ ] Diseñar splash screen real (logo, nombre, branding).
+* [ ] Implementar carga de preferencias durante el splash.
+* [ ] Aplicar tema cargado antes de mostrar Home.
+
+### Calidad
+* [ ] Revisar UI/UX en dispositivo real (consistencia, responsividad).
+* [ ] Verificar que tema claro/oscuro funciona en todas las pantallas.
+* [ ] Limpiar código: eliminar código muerto, comentarios obsoletos.
+* [ ] Ejecutar `flutter analyze` — cero warnings.
+* [ ] Actualizar `README.md`.
+* [ ] Preparar icono de la app.
+* [ ] (Opcional) Preparar para publicación en Play Store.
